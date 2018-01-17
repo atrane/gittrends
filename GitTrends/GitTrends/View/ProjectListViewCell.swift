@@ -14,15 +14,11 @@ class ProjectListViewCell: UITableViewCell {
     @IBOutlet private weak var starsLable: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func configureCell(with viewModel: ProjectViewModel) {
+        self.projectNameLable.text = viewModel.projectName
+        self.starsLable.text = viewModel.stars
+        self.descriptionLabel.text = viewModel.projectDescription
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 
 }

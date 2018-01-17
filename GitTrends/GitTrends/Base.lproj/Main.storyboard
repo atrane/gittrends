@@ -94,25 +94,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWp-7x-jW5">
-                                <rect key="frame" x="126" y="178" width="124" height="29"/>
+                                <rect key="frame" x="126" y="184.5" width="124" height="29"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" red="1" green="0.37160886865311538" blue="0.19177790227241809" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummy_profile.png" translatesAutoresizingMaskIntoConstraints="NO" id="NHN-SZ-awl">
-                                <rect key="frame" x="141.5" y="74" width="93.5" height="94"/>
+                                <rect key="frame" x="137.5" y="74" width="100" height="100.5"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="Km4-0v-rx9"/>
                                     <constraint firstAttribute="width" secondItem="NHN-SZ-awl" secondAttribute="height" multiplier="1:1" id="kbd-Gl-oBG"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEL-Lg-0WM">
-                                <rect key="frame" x="20" y="217" width="335" height="21"/>
+                                <rect key="frame" x="20" y="223.5" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.66081011295318604" green="0.72532778978347778" blue="0.7505456805229187" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDm-jJ-kMG">
-                                <rect key="frame" x="30" y="260" width="315" height="40"/>
+                                <rect key="frame" x="30" y="266.5" width="315" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zj6-Gd-oqG" userLabel="starBgVew">
                                         <rect key="frame" x="44" y="0.0" width="79" height="40"/>
@@ -190,13 +191,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ReadMe.md" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXk-Fu-d3X">
-                                <rect key="frame" x="20" y="320" width="96" height="21"/>
+                                <rect key="frame" x="20" y="326.5" width="96" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="0.16128137707710266" green="0.25432971119880676" blue="0.30032813549041748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Xf-bQ-khy">
-                                <rect key="frame" x="20" y="361" width="335" height="286"/>
+                                <rect key="frame" x="20" y="367.5" width="335" height="279.5"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -204,7 +205,7 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Cyd-Wg-nHl">
-                                <rect key="frame" x="169" y="485.5" width="37" height="37"/>
+                                <rect key="frame" x="169" y="489" width="37" height="37"/>
                                 <color key="color" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -228,7 +229,7 @@
                             <constraint firstItem="oEL-Lg-0WM" firstAttribute="top" secondItem="QWp-7x-jW5" secondAttribute="bottom" constant="10" id="esI-6C-rUJ"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZXk-Fu-d3X" secondAttribute="trailing" constant="20" symbolic="YES" id="kDj-vv-XT0"/>
                             <constraint firstItem="oEL-Lg-0WM" firstAttribute="centerX" secondItem="GSv-IS-nSm" secondAttribute="centerX" id="mF9-W3-amj"/>
-                            <constraint firstItem="NHN-SZ-awl" firstAttribute="width" secondItem="GSv-IS-nSm" secondAttribute="width" multiplier="25:100" id="puf-Om-5YV"/>
+                            <constraint firstItem="NHN-SZ-awl" firstAttribute="width" secondItem="GSv-IS-nSm" secondAttribute="width" multiplier="25:100" priority="750" id="puf-Om-5YV"/>
                             <constraint firstItem="QWp-7x-jW5" firstAttribute="top" secondItem="NHN-SZ-awl" secondAttribute="bottom" constant="10" id="xJQ-xM-USD"/>
                             <constraint firstItem="Cyd-Wg-nHl" firstAttribute="centerX" secondItem="1Xf-bQ-khy" secondAttribute="centerX" id="xne-ja-63n"/>
                         </constraints>
@@ -260,6 +261,9 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.3766380250453949" green="0.48959815502166748" blue="0.5440593957901001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Upv-3g-yGB" kind="relationship" relationship="rootViewController" id="Ev1-6H-fnL"/>
