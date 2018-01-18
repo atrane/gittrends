@@ -43,26 +43,23 @@ class ProjectDetailsViewController: UIViewController {
         forkslabel.text = viewModel.forks
         readMeWebView.navigationDelegate = self
         
-        // Move netork calls to outside
-        if let profileImageURL = viewModel.profileImageURL {
-            NetworkAPIClient.loadImageFrom(url: profileImageURL) { [weak self] (data, error) in
-                if let imgData = data {
-                    self?.profileImage.image = UIImage(data: imgData)
-                }
+        viewModel.getProfileImageData { [weak self] (data, error) in
+            if let imgData = data {
+                self?.profileImage.image = UIImage(data: imgData)
             }
         }
-        if let requestURL = viewModel.readmeRequestURL {
-            let apiService = NetworkAPIClient.shared
-            activityIndicator.startAnimating()
-            apiService.getReadmeURLsdetails(from: requestURL, complete: { (readMeModel, error) in
-                DispatchQueue.main.sync { [weak self] in
-                    if let htmlURL = readMeModel?.htmlURL {
-                        self?.loadReadMe(withURLString: htmlURL)
-                    } else {
-                        self?.activityIndicator.startAnimating()
-                    }
-                }
-            })
+        
+        self.activityIndicator.startAnimating()
+        viewModel.getReadMeViewModel { [weak self] (readMeModel, error) in
+            if let htmlURL = readMeModel?.htmlURL {
+                self?.loadReadMe(withURLString: htmlURL)
+            } else {
+                self?.activityIndicator.stopAnimating()
+                let message = error?.localizedDescription
+                let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
+            }
         }
     }
     
@@ -92,10 +89,6 @@ class ProjectDetailsViewController: UIViewController {
 
 extension ProjectDetailsViewController: WKNavigationDelegate {
     
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        // Strat animating
-//        activityIndicator.startAnimating()
-    }
     // Hide activityIndicator on success, error
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.stopAnimating()

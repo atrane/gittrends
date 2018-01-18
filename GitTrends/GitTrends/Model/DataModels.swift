@@ -4,12 +4,12 @@
 //
 //  Created by A Rane on 17/01/18.
 //  Copyright © 2018 A Rane. All rights reserved.
-//
+
 
 import Foundation
 
 
-
+// Codable Ref: https://hackernoon.com/everything-about-codable-in-swift-4-97d0e18a2999
 struct ProjectsList: Codable {
     let projects: [Project]
     
@@ -83,39 +83,3 @@ struct ReadmeURLs: Codable {
         case downloadURL = "download_url"
     }
 }
-
-
-extension ProjectsList {
-    
-    func projectsListViewModel() -> [ProjectViewModel] {
-        return projects.map {
-            return ProjectViewModel(project: $0)
-        }
-    }
-
-    // Get the details of project from project id
-    func projectDetailsViewModel(for projectID: Int) -> ProjectDetailsViewModel? {
-        let firstProject = projects.filter{ $0.id == projectID }.first
-        guard let project = firstProject else {
-            print("Error: No project found")
-            return nil
-        }
-        return ProjectDetailsViewModel(project: project)
-    }
-    
-    // Get the details of project from index
-    func projectDetailsViewModel(at projectIndex:Int) -> ProjectDetailsViewModel? {
-        if projectIndex >= 0, projectIndex < projects.count {
-            let project = projects[projectIndex]
-            return ProjectDetailsViewModel(project: project)
-        } else {
-            print("Error: No project found at projectIndex \(projectIndex)")
-            return nil
-        }
-    }
-    
-}
-
-
-
-

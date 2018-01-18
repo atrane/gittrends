@@ -15,15 +15,14 @@ class ProjectListViewController: UITableViewController {
     
     static let projectDetailSegue = "ProjectDetailSegue"
     static let projectListCellIdentifier = "ProjectCellIdentifier"
-    // Observe listViewDataSource
+    
+    let viewModel = ProjectListViewModel(webservice: NetworkAPIClient.shared)
+    // Observe listViewDataSource, initilised with empty
     private var listViewDataSource = [ProjectViewModel]() {
         didSet {
             tableView.reloadData()
         }
     }
-    
-    // This will be a original copy of listViewDataSource, stored when we fetch listViewDataSource from service, we are goig to apply filter on this for srarch.
-    private var originalDataSource = [ProjectViewModel]()
     
     private var searchTerm = "" {
         didSet {
@@ -35,10 +34,11 @@ class ProjectListViewController: UITableViewController {
         super.viewDidLoad()
         
         configureUI()
+        confugureViewModel()
     }
     
     func configureUI() {
-        
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
@@ -52,34 +52,50 @@ class ProjectListViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search treding projects"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+    }
+    
+    func confugureViewModel() {
+        // observers
+        viewModel.reloadViewModel = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.listViewDataSource = strongSelf.viewModel.projectViewModels
+        }
         
-        
-        let apiService = NetworkAPIClient.shared
-        activityIndicator.startAnimating()
-        apiService.fetchTrendingProjects { (projecList, error) in
-            DispatchQueue.main.sync { [weak self] in
-                self?.listViewDataSource = (projecList?.projectsListViewModel())!
-                self?.activityIndicator.stopAnimating()
-                self?.originalDataSource = (self?.listViewDataSource)!
+        viewModel.updateLoadingStatus = { [weak self] in
+            guard let strongSelf = self else { return }
+            if strongSelf.viewModel.isLoading {
+                strongSelf.activityIndicator.startAnimating()
+            } else {
+                strongSelf.activityIndicator.stopAnimating()
             }
         }
-    }
-    
-    private func updateListViewWithSearchResults() {
-        guard !searchTerm.isEmpty else {
-            listViewDataSource = originalDataSource
-            return
+        viewModel.showAlertClosure = { [weak self] in
+            guard let strongSelf = self else { return }
+            let message = strongSelf.viewModel.error?.localizedDescription
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            strongSelf.present(alert, animated: true, completion: nil)
         }
         
-        listViewDataSource = originalDataSource.filter { $0.projectName.lowercased().contains(searchTerm.lowercased()) ||  $0.projectDescription.lowercased().contains(searchTerm.lowercased()) }
+        // Start fetching
+        viewModel.initFetch()
     }
     
+    // Helper for search.
+    private func updateListViewWithSearchResults() {
+        guard !searchTerm.isEmpty else {
+            listViewDataSource = viewModel.projectViewModels
+            return
+        }
+        listViewDataSource = viewModel.serachResutsViewModel(searchText: searchTerm)
+    }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return viewModel.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,7 +121,7 @@ class ProjectListViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ==  ProjectListViewController.projectDetailSegue, let destinationVC = segue.destination as? ProjectDetailsViewController, let indexPath = self.tableView.indexPathForSelectedRow {
             let vm = listViewDataSource[indexPath.row]
-            destinationVC.viewModel = ProjectDetailsViewModel(project: vm.project)
+            destinationVC.viewModel = ProjectDetailsViewModel(project: vm.project, webservice: NetworkAPIClient.shared)
         }
     }
 }

@@ -37,16 +37,3 @@ struct RequestParameterValue {
     static let order = "desc"
     static let language = "swift"
 }
-
-struct Responsekeys {
-    static let items = "items"
-    static let name = "name"
-    static let stars = "stargazers_count"
-    static let description = "description"
-    static let forks = "forks"
-    static let owner = "owner"
-    static let login = "login"
-    static let avatarURL = "avatar_url"
-    static let htmlURL = "html_url"
-    static let downloadURL = "download_url"
-}

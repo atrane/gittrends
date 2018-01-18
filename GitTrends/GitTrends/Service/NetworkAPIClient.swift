@@ -8,8 +8,12 @@
 
 import Foundation
 
+protocol NetworkAPIClientProtocol {
+    func fetchTrendingProjects(complete: @escaping (_ products: ProjectsList?, _ error: Error? )->() )
+    func getReadmeURLsdetails(from requestUrl: URL, complete: @escaping (_ readMe: ReadmeURLs?, _ error: Error? )->() )
+}
 
-public final class NetworkAPIClient {
+public final class NetworkAPIClient: NetworkAPIClientProtocol {
     
     // MARK: - Instance Properties
     internal let baseURL: String
@@ -61,27 +65,11 @@ public final class NetworkAPIClient {
         task.resume()
     }
     
-    
     // Ref: https://developer.github.com/v3/repos/contents/#get-the-readme
     // GET /repos/:owner/:repo/readme
     func getReadmeURLsdetails(from requestUrl: URL, complete: @escaping (_ readMe: ReadmeURLs?, _ error: Error? )->() ) {
         
-//        let success: (Bool, ReadmeURLs?, Error?) -> Void = { success, readMe, error in
-//            DispatchQueue.main.async { complete(readMe, error) }
-//        }
-//        let failuer: (Bool, ReadmeURLs?, Error?) -> Void = { success, readMe, error in
-//            DispatchQueue.main.async { complete(readMe, error) }
-//        }
-        
-//        let url = baseURL + RequestKeys.repos + project.owner.userName + RequestKeys.slash +  project.name + RequestKeys.readme
-//        guard let requestUrl = URL.init(string: url) else {
-//            print("Error in buiduing URL...")
-//            complete(nil, nil)
-//            return
-//        }
-        
         let urlRequest = URLRequest.init(url: requestUrl)
-        
         let task = session.dataTask(with: urlRequest) {
             (data, response, error) in
             // check for any errors
@@ -90,7 +78,6 @@ public final class NetworkAPIClient {
                 complete(nil, error)
                 return
             }
-            
             // parse the result as JSON
             do {
                 let readMe = try JSONDecoder().decode(ReadmeURLs.self, from: responseData)
@@ -105,25 +92,6 @@ public final class NetworkAPIClient {
             }
         }
         task.resume()
-    }
-    
-    // Load Image
-    // Not depends on NetworkAPIClient, but good to have all netowkring at one place
-    class func loadImageFrom(url: URL, complete: @escaping ( _ imageData: Data?, Error?)->() ) {
-        
-        DispatchQueue.global().async {
-            do {
-                let imgData = try Data(contentsOf: url)
-                DispatchQueue.main.async {
-                    complete(imgData, nil)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    complete(nil, error)
-                }
-            }
-        }
-        
     }
 }
 
