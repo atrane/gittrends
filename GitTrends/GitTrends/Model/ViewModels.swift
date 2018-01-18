@@ -36,7 +36,7 @@ class ProjectListViewModel {
         }
     }
     
-    // Call backs to be implemented by listener
+    // Call backs to be implemented by listener, VCs
     var reloadViewModel: (()->())?
     var showAlertClosure: (()->())?
     var updateLoadingStatus: (()->())?
@@ -46,6 +46,7 @@ class ProjectListViewModel {
         }
 
     }
+    
     let numberOfSections = 1
 }
 

@@ -17,6 +17,7 @@ class ProjectListViewController: UITableViewController {
     static let projectListCellIdentifier = "ProjectCellIdentifier"
     
     let viewModel = ProjectListViewModel(webservice: NetworkAPIClient.shared)
+
     // Observe listViewDataSource, initilised with empty
     private var listViewDataSource = [ProjectViewModel]() {
         didSet {
@@ -38,15 +39,16 @@ class ProjectListViewController: UITableViewController {
     }
     
     func configureUI() {
-
+        // TableView setup
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
+        // ActivityIndicator setup
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         tableView.backgroundView = activityIndicator
         activityIndicator.center = tableView.center
         
-        //SearchBar
+        // SearchBar setup
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search treding projects"
@@ -55,7 +57,7 @@ class ProjectListViewController: UITableViewController {
     }
     
     func confugureViewModel() {
-        // observers
+        // View model observers
         viewModel.reloadViewModel = { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -79,11 +81,11 @@ class ProjectListViewController: UITableViewController {
             strongSelf.present(alert, animated: true, completion: nil)
         }
         
-        // Start fetching
+        // Start fetching model data.
         viewModel.initFetch()
     }
     
-    // Helper for search.
+    // Helper for search, this will update the datasource from viewModel
     private func updateListViewWithSearchResults() {
         guard !searchTerm.isEmpty else {
             listViewDataSource = viewModel.projectViewModels
@@ -94,15 +96,12 @@ class ProjectListViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return viewModel.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return listViewDataSource.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ProjectListViewController.projectListCellIdentifier, for: indexPath) as? ProjectListViewCell else {

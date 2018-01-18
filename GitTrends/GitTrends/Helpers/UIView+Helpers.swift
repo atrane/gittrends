@@ -12,7 +12,6 @@ extension UIView {
     
     /// add rounded corner as well as boarder
     func addRoundCorner(radius: CGFloat = 5.0, color: UIColor = UIColor.gray, borderWidth: CGFloat = 1) {
-        
         self.layer.cornerRadius = radius
         self.layer.masksToBounds = true
         self.layer.borderWidth = 1

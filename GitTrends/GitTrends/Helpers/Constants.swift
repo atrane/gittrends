@@ -8,12 +8,6 @@
 
 import Foundation
 
-//struct StoryBoardConstants {
-//    static let projectDetailSegue = "ProjectDetailSegue"
-//    static let projectListCellIdentifier = "ProjectCellIdentifier"
-//    
-//}
-
 struct RequestKeys {
     static let scheme = "https"
     static let host = "api.github.com"

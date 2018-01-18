@@ -19,6 +19,4 @@ class ProjectListViewCell: UITableViewCell {
         self.starsLable.text = viewModel.stars
         self.descriptionLabel.text = viewModel.projectDescription
     }
-
-
 }

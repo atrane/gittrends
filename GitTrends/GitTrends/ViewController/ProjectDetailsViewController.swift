@@ -27,11 +27,9 @@ class ProjectDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
     }
 
-    
     func configureUI() {
         // Setup UI here
         self.title = viewModel.projectName
@@ -73,7 +71,7 @@ class ProjectDetailsViewController: UIViewController {
         profileImage.makeRound()
     }
     
-    // helper to load URL inside readMeWebView
+    // Helper to load URL inside readMeWebView
     private func loadReadMe(withURLString urlString: String) {
         if let readMeURL = URL(string: urlString) {
             let urlRequest = URLRequest(url: readMeURL)

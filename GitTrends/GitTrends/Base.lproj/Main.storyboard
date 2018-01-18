@@ -107,7 +107,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEL-Lg-0WM">
-                                <rect key="frame" x="20" y="223.5" width="335" height="21"/>
+                                <rect key="frame" x="143.5" y="223.5" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.66081011295318604" green="0.72532778978347778" blue="0.7505456805229187" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -220,12 +220,12 @@
                             <constraint firstItem="ZDm-jJ-kMG" firstAttribute="leading" secondItem="iPf-i9-ul9" secondAttribute="leading" constant="30" id="Nac-ke-wGp"/>
                             <constraint firstItem="iPf-i9-ul9" firstAttribute="trailing" secondItem="ZDm-jJ-kMG" secondAttribute="trailing" constant="30" id="RWM-xr-Vys"/>
                             <constraint firstItem="ZDm-jJ-kMG" firstAttribute="top" secondItem="oEL-Lg-0WM" secondAttribute="bottom" constant="22" id="RwV-rH-FUB"/>
-                            <constraint firstItem="oEL-Lg-0WM" firstAttribute="leading" secondItem="iPf-i9-ul9" secondAttribute="leading" constant="20" id="WHb-9F-u7V"/>
+                            <constraint firstItem="oEL-Lg-0WM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iPf-i9-ul9" secondAttribute="leading" constant="20" id="WHb-9F-u7V"/>
                             <constraint firstItem="QWp-7x-jW5" firstAttribute="centerX" secondItem="GSv-IS-nSm" secondAttribute="centerX" id="Wfm-O6-F6t"/>
                             <constraint firstItem="ZXk-Fu-d3X" firstAttribute="leading" secondItem="iPf-i9-ul9" secondAttribute="leading" constant="20" id="bM7-VZ-w0J"/>
                             <constraint firstItem="NHN-SZ-awl" firstAttribute="centerX" secondItem="GSv-IS-nSm" secondAttribute="centerX" id="bSw-JE-CAU"/>
                             <constraint firstItem="iPf-i9-ul9" firstAttribute="trailing" secondItem="1Xf-bQ-khy" secondAttribute="trailing" constant="20" id="bcm-xe-wK5"/>
-                            <constraint firstItem="iPf-i9-ul9" firstAttribute="trailing" secondItem="oEL-Lg-0WM" secondAttribute="trailing" constant="20" id="ei3-Zt-h68"/>
+                            <constraint firstItem="iPf-i9-ul9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oEL-Lg-0WM" secondAttribute="trailing" constant="20" id="ei3-Zt-h68"/>
                             <constraint firstItem="oEL-Lg-0WM" firstAttribute="top" secondItem="QWp-7x-jW5" secondAttribute="bottom" constant="10" id="esI-6C-rUJ"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZXk-Fu-d3X" secondAttribute="trailing" constant="20" symbolic="YES" id="kDj-vv-XT0"/>
                             <constraint firstItem="oEL-Lg-0WM" firstAttribute="centerX" secondItem="GSv-IS-nSm" secondAttribute="centerX" id="mF9-W3-amj"/>
